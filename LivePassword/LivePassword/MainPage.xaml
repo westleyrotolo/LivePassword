@@ -1,0 +1,382 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="LivePassword.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:telerikPrimitives="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Primitives"
+      xmlns:telerikCore="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Core"
+     xmlns:my1="clr-namespace:Microsoft.Live.Controls;assembly=Microsoft.Live.Controls"   
+  
+    xmlns:local="clr-namespace:LivePassword"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait"  Orientation="Portrait"
+    shell:SystemTray.IsVisible="False">
+    <telerikPrimitives:RadTransitionControl.Transition>
+        <telerikPrimitives:RadScaleTransition BackwardInAnimation="{StaticResource riout}" BackwardOutAnimation="{StaticResource riout}" ForwardInAnimation="{StaticResource riin}" ForwardOutAnimation="{StaticResource riout}" PlayMode="Consecutively">
+         
+        </telerikPrimitives:RadScaleTransition>
+    </telerikPrimitives:RadTransitionControl.Transition>
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="#ecf0f1" >
+        <Grid.Resources>
+            <local:datamodel x:Key="model"></local:datamodel>
+        </Grid.Resources>
+        <Grid x:Name="ContentPanel" HorizontalAlignment="Center" Width="{Binding ElementName=LayoutRoot, Path=ActualWidth}" Grid.Row="1" Margin="0">
+            <Grid.Resources>
+                <Style x:Key="LLSFloatingScrollbarStyle"
+           TargetType="phone:LongListSelector">
+                    <Setter Property="Background"
+        Value="Transparent" />
+                    <Setter Property="Foreground"
+        Value="{StaticResource PhoneForegroundBrush}" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="phone:LongListSelector">
+                                <Grid Background="{TemplateBinding Background}"
+                  d:DesignWidth="480"
+                  d:DesignHeight="800">
+                                    <VisualStateManager.VisualStateGroups>
+                                        <VisualStateGroup x:Name="ScrollStates">
+                                            <VisualStateGroup.Transitions>
+                                                <VisualTransition GeneratedDuration="00:00:00.5" />
+                                            </VisualStateGroup.Transitions>
+                                            <VisualState x:Name="Scrolling">
+                                                <Storyboard>
+                                                    <DoubleAnimation Duration="0"
+                                                 To="1"
+                                                 Storyboard.TargetProperty="Opacity"
+                                                 Storyboard.TargetName="VerticalScrollBar" />
+                                                </Storyboard>
+                                            </VisualState>
+                                            <VisualState x:Name="NotScrolling" />
+                                        </VisualStateGroup>
+                                    </VisualStateManager.VisualStateGroups>
+                                    <Grid Margin="{TemplateBinding Padding}">
+
+                                        <ViewportControl x:Name="ViewportControl"
+                                     HorizontalContentAlignment="Stretch"
+                                     VerticalAlignment="Top" />
+
+                                        <ScrollBar x:Name="VerticalScrollBar"
+                               Margin="4,0,-12,0"
+                               Opacity="0"
+                               HorizontalAlignment="Right"
+                               Orientation="Vertical" />
+                                    </Grid>
+                                </Grid>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+                <DataTemplate x:Key="ItemTemplate">
+
+                    <Border BorderThickness="0,0,0,2" BorderBrush="{StaticResource borderGray}"  HorizontalAlignment="Stretch"     toolkit:TiltEffect.IsTiltEnabled="True"    Tap="brd_Tap"  Margin="12,6" Name="brd" Background="White" CornerRadius="0">
+
+                        <Grid Background="White" Margin="12,6">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{Binding title}" FontFamily="/GothamNarrow-Light.ttf#Gotham" FontSize="25" Foreground="Black"></TextBlock>
+                            <TextBlock Text="{Binding subtitle}" TextWrapping="NoWrap" FontFamily="/GothamNarrow-Light.ttf#Gotham" Grid.Row="1" Grid.ColumnSpan="2" Foreground="Gray"  FontSize="20"></TextBlock>
+                         
+                        </Grid>
+                    </Border>
+                    </DataTemplate>
+
+                    <DataTemplate x:Key="GroupHeaderTemplate">
+                        <Border Background="Transparent" Padding="6" Margin="0,0" Height="62">
+                        <Border BorderThickness="0,0,0,2" BorderBrush="{StaticResource borderBlue}"  Background="{StaticResource primary}" CornerRadius="0" HorizontalAlignment="Stretch"  Margin="0,0,0,0">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Image Width="50" Source="{Binding Path=Title, Converter={StaticResource cImage}}"></Image>
+                                <TextBlock Grid.Column="1" Text="{Binding Title,Converter={StaticResource titleconv}}" Foreground="White"  Margin="12,6" FontSize="30" VerticalAlignment="Center" Padding="0" 
+            FontFamily="GothamNarrow-Light.ttf#Gotham" HorizontalAlignment="Left" />
+                            </Grid>
+                        </Border>
+                        </Border>
+                    </DataTemplate>
+                    <phone:JumpListItemBackgroundConverter x:Key="BackgroundConverter"/>
+                    <phone:JumpListItemForegroundConverter x:Key="ForegroundConverter"/>
+                    <Style x:Key="JumpListStyle" TargetType="phone:LongListSelector">
+                        <Setter Property="GridCellSize" Value="113,113"/>
+                        <Setter Property="LayoutMode" Value="List" />
+                        <Setter Property="ItemTemplate">
+                            <Setter.Value>
+                                <DataTemplate>
+                                    <Border Background="Transparent" Padding="5">
+                                    <Border BorderThickness="0,0,0,3" BorderBrush="{StaticResource borderBlue}" CornerRadius="0" Background="{StaticResource primary}" HorizontalAlignment="Stretch" 
+         Height="62" Margin="0,0,0,0">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <Image Width="62" Source="{Binding Title, Converter={StaticResource cImage}}"></Image>
+                                            <TextBlock Grid.Column="1" Text="{Binding Title, Converter={StaticResource titleconv}}" Foreground="White"  Margin="12,6" FontSize="30" VerticalAlignment="Center" Padding="0" 
+            FontFamily="GothamNarrow-Light.ttf#Gotham" HorizontalAlignment="Left" />
+                                        </Grid>
+                                    </Border>
+                                    </Border>
+                                </DataTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+            </Grid.Resources>
+            <TextBlock TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Name="textvisibility" Visibility="Collapsed" Foreground="Gray" Margin="12,6" FontFamily="GothamNarrow-Light.ttf#Gotham" FontSize="35" TextWrapping="Wrap" >
+                <Run  Text="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.nodata}"></Run>
+                <LineBreak></LineBreak>
+                <Run Text="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.addnewitem}"></Run>
+            </TextBlock>
+            <phone:LongListSelector
+  x:Name="items" 
+                Visibility="Visible"
+                Margin="0,0,0,62"
+                ItemsSource="{Binding Source={StaticResource model}, Path=general}"
+  JumpListStyle="{StaticResource JumpListStyle}"
+  Background="Transparent"
+  GroupHeaderTemplate="{StaticResource GroupHeaderTemplate}"
+  ItemTemplate="{StaticResource ItemTemplate}"
+  LayoutMode="List"
+             Style="{StaticResource LLSFloatingScrollbarStyle}"
+                HorizontalContentAlignment="Center"
+                VerticalAlignment="Stretch"
+  IsGroupingEnabled="true"
+  HideEmptyGroups ="true"
+                  />
+            <telerikPrimitives:RadBusyIndicator Grid.RowSpan="2"  IsRunning="False" Visibility="Collapsed" Name="radbusy" AnimationStyle="AnimationStyle1">
+                <telerikPrimitives:RadBusyIndicator.Background>
+                    <SolidColorBrush Color="Black" Opacity=".5"></SolidColorBrush>
+                </telerikPrimitives:RadBusyIndicator.Background>
+            </telerikPrimitives:RadBusyIndicator>
+            <Popup Grid.RowSpan="2" Name="p1" Width="{Binding ElementName=LayoutRoot, Path=ActualWidth}" VerticalAlignment="Stretch"  >
+                <Grid Width="{Binding ElementName=LayoutRoot, Path=ActualWidth}" Height="{Binding ElementName=ContentPanel,Path=ActualHeight}">
+                    <Grid.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"></SolidColorBrush>
+                    </Grid.Background>
+                <Border BorderThickness="0,0,0,3" BorderBrush="{StaticResource borderGray}" Background="#ecf0f1" Height="200" Width="{Binding ElementName=LayoutRoot, Path=ActualWidth}"  VerticalAlignment="Center">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock Margin="10,20,10,0"  Text="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.nocryptonedrive}" FontFamily="/GothamNarrow-Light.ttf#Gotham" Grid.Row="1" Grid.ColumnSpan="2" Foreground="Black" FontSize="25" TextWrapping="Wrap"></TextBlock>
+                            <!--<my1:SignInButton Grid.Row="2" TextType="Connect" HorizontalAlignment="Center" Scopes="wl.signin wl.basic wl.skydrive_update" Branding="Skydrive" Content="Button" Height="72" Margin="12,6" Name="SignInButton1" VerticalAlignment="Top" Width="200" SessionChanged="btn_Upload_SessionChanged" ClientId="0000000048132404" BorderBrush="Transparent" Background="{StaticResource primary}" ></my1:SignInButton>-->
+                            <telerikPrimitives:RadBusyIndicator Grid.RowSpan="3"  IsRunning="False" Visibility="Collapsed" Name="radbusy2" AnimationStyle="AnimationStyle1">
+                                <telerikPrimitives:RadBusyIndicator.Background>
+                                    <SolidColorBrush Color="Black" Opacity=".5"></SolidColorBrush>
+                                </telerikPrimitives:RadBusyIndicator.Background>
+                            </telerikPrimitives:RadBusyIndicator>
+                        </Grid>
+                        </Border>
+                </Grid>
+            </Popup>
+        </Grid>
+        <Grid Visibility="Visible" Width="{Binding ElementName=LayoutRoot, Path=ActualWidth}" Grid.ColumnSpan="2" VerticalAlignment="Stretch"  Name="pAddItem"  Grid.Row="1"  HorizontalAlignment="Stretch">
+            <Grid Width="{Binding ElementName=LayoutRoot, Path=ActualWidth}"  Background="#ecf0f1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid  HorizontalAlignment="Stretch" Grid.Row="1">
+                    <phone:Pivot Name="pivot" Title="" Margin="0,0" Foreground="Gray" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" >
+                        <phone:Pivot.TitleTemplate>
+                            <DataTemplate>
+                                <TextBlock FontSize="1" Margin="0" HorizontalAlignment="Left" Foreground="Gray" Text="{Binding}" FontFamily="/GothamNarrow-Light.ttf#Gotham"></TextBlock>
+                            </DataTemplate>
+                        </phone:Pivot.TitleTemplate>
+                        <phone:Pivot.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Foreground="Gray" FontSize="20" Margin="0,0,0,6"  Text="{Binding}"></TextBlock>
+                            </DataTemplate>
+                        </phone:Pivot.HeaderTemplate>
+                        <phone:PivotItem Margin="0"  HorizontalAlignment="Stretch" Header="Password">
+                            <Grid>       
+                                <ItemsControl toolkit:TiltEffect.SuppressTilt="True"> 
+                        <ItemsControl.Items>
+
+                            <Border BorderThickness="0,0,0,2" BorderBrush="{StaticResource borderGray}" Tap="Border_Tap_4" Grid.Row="0" HorizontalAlignment="Stretch"        CornerRadius="0"  Margin="24,6" Background="White">
+                                            <Grid toolkit:TiltEffect.IsTiltEnabled="True"   HorizontalAlignment="Stretch">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Border BorderThickness="0,0,0,0" BorderBrush="{StaticResource borderGray}"  Width="60" Height="60" CornerRadius="0" Background="{StaticResource primary}">
+                                        <Image Source="/Images/CreditCard.png"></Image>
+                                    </Border>
+                                    <TextBlock Margin="10,0" Text="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.creditcard}"  FontFamily="/GothamNarrow-Light.ttf#Gotham" Foreground="#95a5a6" VerticalAlignment="Center" Grid.Column="1"></TextBlock>
+                                </Grid>
+                            </Border>
+
+                            <Border BorderThickness="0,0,0,2" BorderBrush="{StaticResource borderGray}" Name="blogin" Grid.Row="2" Tap="Border_Tap" HorizontalAlignment="Stretch"         CornerRadius="0"  Margin="24,6" Background="White">
+                                            <Grid toolkit:TiltEffect.IsTiltEnabled="True"   HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Border BorderThickness="0,0,0,0" BorderBrush="{StaticResource borderGray}"  Width="60" Height="60" CornerRadius="0" Background="{StaticResource primary}">
+                                <Image Source="/Images/Login.png"></Image>
+                            </Border>
+                                    <TextBlock HorizontalAlignment="Stretch" FontFamily="/GothamNarrow-Light.ttf#Gotham" Margin="10,0" Text="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.login}" Foreground="#95a5a6" VerticalAlignment="Center" Grid.Column="1"></TextBlock>
+                        </Grid>
+                        </Border>
+                            <Border BorderThickness="0,0,0,2" BorderBrush="{StaticResource borderGray}" Tap="Border_Tap_2" Grid.Row="3" HorizontalAlignment="Stretch"        CornerRadius="0" Margin="24,6" Background="White">
+                                            <Grid toolkit:TiltEffect.IsTiltEnabled="True"   HorizontalAlignment="Stretch">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Border BorderThickness="0,0,0,0" BorderBrush="{StaticResource borderGray}" 
+                                            
+                                            Width="60" Height="60" CornerRadius="0" Background="{StaticResource primary}">
+                                        <Image Source="/Images/Mail.png"></Image>
+                                    </Border>
+                                    <TextBlock Margin="10,0"  FontFamily="/GothamNarrow-Light.ttf#Gotham" Text="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.mail}" Foreground="#95a5a6" VerticalAlignment="Center" Grid.Column="1"></TextBlock>
+                                </Grid>
+                            </Border>
+                                        <Border BorderThickness="0,0,0,2" BorderBrush="{StaticResource borderGray}" Tap="Border_Tap_3" Grid.Row="4" HorizontalAlignment="Stretch"        CornerRadius="0"  Margin="24,6" Background="White">
+                                            <Grid toolkit:TiltEffect.IsTiltEnabled="True"   HorizontalAlignment="Stretch">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
+                                                <Border BorderThickness="0,0,0,0" BorderBrush="{StaticResource borderGray}"  Width="60" Height="60" CornerRadius="0" Background="{StaticResource primary}">
+                                                    <Image Source="/Images/note.png"></Image>
+                                                </Border>
+                                                <TextBlock Margin="10,0" Text="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.note}"  FontFamily="/GothamNarrow-Light.ttf#Gotham" Foreground="#95a5a6" VerticalAlignment="Center" Grid.Column="1"></TextBlock>
+                                            </Grid>
+                                        </Border>
+                                        <Border BorderThickness="0,0,0,2" BorderBrush="{StaticResource borderGray}" Name="bwebsite" Tap="Border_Tap_1" Grid.Row="5" HorizontalAlignment="Stretch"        CornerRadius="0" Margin="24,6" Background="White">
+                                            <Grid toolkit:TiltEffect.IsTiltEnabled="True"   HorizontalAlignment="Stretch">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Border BorderThickness="0,0,0,0" BorderBrush="{StaticResource borderGray}"  Width="60" Height="60" CornerRadius="0" Background="{StaticResource primary}">
+                                    <Image Source="/Images/Explorer.png"></Image>
+                                </Border>
+                                    <TextBlock  FontFamily="/GothamNarrow-Light.ttf#Gotham" Margin="10,0" Text="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.website}" Foreground="#95a5a6" VerticalAlignment="Center" Grid.Column="1"></TextBlock>
+                            </Grid>
+                        </Border>
+
+                        </ItemsControl.Items>
+                    </ItemsControl>
+   </Grid>
+                        </phone:PivotItem>
+                        <phone:PivotItem Header="Files" Margin="0">
+                            <Grid>
+                                <ItemsControl  >
+                                    <ItemsControl.Items>
+                                        <Border BorderThickness="0,0,0,2" BorderBrush="{StaticResource borderGray}" Tap="Border_Tap_6" Grid.Row="1" HorizontalAlignment="Stretch"       CornerRadius="0"  Margin="24,6" Background="White">
+                                            <Grid toolkit:TiltEffect.IsTiltEnabled="True"   HorizontalAlignment="Stretch">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
+                                                <Border BorderThickness="0,0,0,0" BorderBrush="{StaticResource borderGray}" Width="60" Height="60" CornerRadius="0" Background="{StaticResource primary}">
+                                                    <Image Source="/Images/audio.png"></Image>
+                                                </Border>
+                                                <TextBlock Margin="10,0" Text="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.audio}"  FontFamily="/GothamNarrow-Light.ttf#Gotham" Foreground="#95a5a6" VerticalAlignment="Center" Grid.Column="1"></TextBlock>
+                                            </Grid>
+                                        </Border>
+                                        <Border BorderThickness="0,0,0,2" BorderBrush="{StaticResource borderGray}" Tap="Border_Tap_5" Grid.Row="1" HorizontalAlignment="Stretch"        CornerRadius="0"  Margin="24,6" Background="White">
+                                            <Grid  toolkit:TiltEffect.IsTiltEnabled="True"  HorizontalAlignment="Stretch">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
+                                                <Border BorderThickness="0,0,0,0" BorderBrush="{StaticResource borderGray}" Width="60" Height="60" CornerRadius="0" Background="{StaticResource primary}">
+                                                    <Image Source="/Images/Images.png"></Image>
+                                                </Border>
+                                                <TextBlock Margin="10,0" Text="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.images}"  FontFamily="/GothamNarrow-Light.ttf#Gotham" Foreground="#95a5a6" VerticalAlignment="Center" Grid.Column="1"></TextBlock>
+                                            </Grid>
+                                        </Border>
+
+                                        <Border BorderThickness="0,0,0,2" BorderBrush="{StaticResource borderGray}" Name="bfile" Grid.Row="2" Tap="bfile_Tap" HorizontalAlignment="Stretch"         CornerRadius="0"  Margin="24,6" Background="White">
+                                            <Grid  toolkit:TiltEffect.IsTiltEnabled="True"  HorizontalAlignment="Stretch">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
+                                                <Border BorderThickness="0,0,0,0" BorderBrush="{StaticResource borderGray}"  Width="60" Height="60" CornerRadius="0" Background="{StaticResource primary}">
+                                                    <Image Source="/Images/files.png"></Image>
+                                                </Border>
+                                                <TextBlock HorizontalAlignment="Stretch" FontFamily="/GothamNarrow-Light.ttf#Gotham" Margin="10,0" Text="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.files}" Foreground="#95a5a6" VerticalAlignment="Center" Grid.Column="1"></TextBlock>
+                                            </Grid>
+                                        </Border>
+
+
+                                        <Border BorderThickness="0,0,0,2" BorderBrush="{StaticResource borderGray}" Tap="Border_Tap_7" Grid.Row="4" HorizontalAlignment="Stretch"        CornerRadius="0"  Margin="24,6" Background="White">
+                                            <Grid toolkit:TiltEffect.IsTiltEnabled="True"  HorizontalAlignment="Stretch">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
+                                                <Border BorderThickness="0,0,0,0" BorderBrush="{StaticResource borderGray}"  Width="60" Height="60" CornerRadius="0" Background="{StaticResource primary}">
+                                                    <Image Source="/Images/office.png"></Image>
+                                                </Border>
+                                                <TextBlock Margin="10,0" Text="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.office}"  FontFamily="/GothamNarrow-Light.ttf#Gotham" Foreground="#95a5a6" VerticalAlignment="Center" Grid.Column="1"></TextBlock>
+                                            </Grid>
+                                        </Border>
+
+
+                                        <Border BorderThickness="0,0,0,2" BorderBrush="{StaticResource borderGray}" Tap="Border_Tap_8" Grid.Row="4" HorizontalAlignment="Stretch"        CornerRadius="0"  Margin="24,6" Background="White">
+                                            <Grid toolkit:TiltEffect.IsTiltEnabled="True"   HorizontalAlignment="Stretch">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
+                                                <Border BorderThickness="0,0,0,0" BorderBrush="{StaticResource borderGray}"  Width="60" Height="60" CornerRadius="0" Background="{StaticResource primary}">
+                                                    <Image Source="/Images/video.png"></Image>
+                                                </Border>
+                                                <TextBlock Margin="10,0" Text="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.video}"  FontFamily="/GothamNarrow-Light.ttf#Gotham" Foreground="#95a5a6" VerticalAlignment="Center" Grid.Column="1"></TextBlock>
+                                            </Grid>
+                                        </Border>
+                                    </ItemsControl.Items>
+                                </ItemsControl>
+                            </Grid>
+                        </phone:PivotItem>
+                    </phone:Pivot> 
+                </Grid>
+        </Grid>
+        </Grid>
+        <!--Uncomment to see an alignment grid to help ensure your controls are
+            aligned on common boundaries.  The image has a top margin of -32px to
+            account for the System Tray. Set this to 0 (or remove the margin altogether)
+            if the System Tray ie s hidden.
+
+            Before shipping remove this XAML and the image itself.-->
+        <!--<Image Source="/Assets/AlignmentGrid.png" VerticalAlignment="Top" Height="800" Width="480" Margin="0" Grid.Row="0" Grid.RowSpan="2" IsHitTestVisible="False" />-->
+
+    </Grid>
+
+    <!--Sample code showing usage of ApplicationBar-->
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" ForegroundColor="White"  IsMenuEnabled="True" BackgroundColor="{StaticResource BackgroundColor}">
+            <shell:ApplicationBarIconButton Click="ApplicationBarIconButton_Click" IconUri="/Images/Add.png" Text="Add"></shell:ApplicationBarIconButton>
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="manage keyword" Click="ApplicationBarMenuItem_Click"></shell:ApplicationBarMenuItem>
+                  <shell:ApplicationBarMenuItem Text="upload on OneDrive" Click="ApplicationBarMenuItem_Click_2"></shell:ApplicationBarMenuItem>
+              <shell:ApplicationBarMenuItem Text="help us with translate" Click="ApplicationBarMenuItem_Click_1"></shell:ApplicationBarMenuItem>
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+</phone:PhoneApplicationPage>
+

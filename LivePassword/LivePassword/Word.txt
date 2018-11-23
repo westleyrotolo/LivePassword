@@ -1,0 +1,120 @@
+about	
+add	
+add file	
+add a new item	
+Audio	
+Intended function only in the full version	
+cancel	
+Class	
+delete	
+change password	
+clear all	
+Code	
+confirm	
+open	
+Copied!	
+copy	
+Credit Card	
+share	
+CVV	
+CVV copied succesfully	
+Date of Birth	
+delete	
+Deleted!	
+Archive your passwords, your notes, your images in Live Password	
+Documents	
+driverlicense	Driver License	
+edit	
+Enter		
+The field must not be empty	
+file deleted succesfully	
+Files	
+File saved in OneDrive root's	
+go to website	
+hide	
+Identity	
+Identity Card	
+Image deleted succesfully	
+Images	
+Image saved in media library	
+import files	
+import picture	
+insert new password	
+insert password	
+Issued	
+Keyword	
+Login	
+Mail	
+Mail copied succesfully	
+manage keywords	
+Master Password	
+Please modify your title	
+Please modify your expiration	
+please modify your mail	
+Please modify your number	
+Please modify your password	
+Please modify your text	
+Please modify your user	
+Please modify your CVV	
+please modify your web site	
+Name	
+Nationality	
+Insert new keyword	
+The data will be saved in a text file is not encrypted in your account OneDrive	
+nodata	no data to display	
+no keywords	
+Note	
+Number	
+Number copied succesfully	
+Office	
+Passport	
+Password	
+Password copied succesfully	
+Password incorrrect.	
+password do not match	
++Audio	
++Credit Card	
++Driver License	
++Files	
+images	
++Identity Card	
++Images	
+PIN	
+PIN copied succesfully	
+Place of Birth	
++Login	
++Mail	
++Note	
++Documenti	
++Passport	
++Router	
++Social Security Number	
+Purchase full version	
++Video	
++Web Site	
+repeat password	
+repeat new password	
+Router	
+save	
+Saved!	
+Share credit card information.
+Share login information.
+Share mail information.
+Share note information.	
+Share
+Share site web information.
+show
+Web Site copied succesfully
+Social Security Number
+SSID
+Tap word to delete
+Text
+Text copied succesfully
+Title
+Title copied succesfully	
+Trial Version
+upload on OneDrive	
+User
+User copied succesfully
+Video
+WebSite

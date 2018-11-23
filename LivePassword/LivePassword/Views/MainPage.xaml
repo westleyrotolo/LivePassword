@@ -1,0 +1,161 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="LivePassword.Views.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:viewModels="clr-namespace:LivePassword.ViewModels"
+    xmlns:converters="clr-namespace:LivePassword.Converters"
+    xmlns:controls="clr-namespace:LivePassword.Controls"
+    xmlns:common="clr-namespace:LivePassword.Common"
+    xmlns:abu="clr-namespace:AppBarUtils;assembly=AppBarUtils"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:uap="clr-namespace:Windows.UI.Xaml.Controls;assembly=Windows.UI.Xaml"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="False"
+    toolkit:TiltEffect.IsTiltEnabled="True">
+
+    <toolkit:TransitionService.NavigationInTransition>
+        <toolkit:NavigationInTransition>
+            <toolkit:NavigationInTransition.Backward>
+                <toolkit:SlideTransition Mode="SlideUpFadeIn"/>
+            </toolkit:NavigationInTransition.Backward>
+            <toolkit:NavigationInTransition.Forward>
+                <toolkit:SlideTransition Mode="SlideDownFadeIn" />
+            </toolkit:NavigationInTransition.Forward>
+        </toolkit:NavigationInTransition>
+    </toolkit:TransitionService.NavigationInTransition>
+    <toolkit:TransitionService.NavigationOutTransition>
+        <toolkit:NavigationOutTransition>
+            <toolkit:NavigationOutTransition.Backward>
+                <toolkit:SlideTransition Mode="SlideUpFadeOut"/>
+            </toolkit:NavigationOutTransition.Backward>
+            <toolkit:NavigationOutTransition.Forward>
+                <toolkit:SlideTransition Mode="SlideDownFadeOut"/>
+            </toolkit:NavigationOutTransition.Forward>
+        </toolkit:NavigationOutTransition>
+    </toolkit:TransitionService.NavigationOutTransition>
+    
+    <phone:PhoneApplicationPage.DataContext>
+        <viewModels:MainViewModel/>
+    </phone:PhoneApplicationPage.DataContext>
+
+    <phone:PhoneApplicationPage.Resources>
+        <converters:ItemsToVisibilityConverter x:Key="ItemsToVisibilityConverter"/>
+        
+        <Style x:Key="JumpListStyle" TargetType="phone:LongListSelector">
+            <Setter Property="Margin" Value="0,19,0,0"/>
+            <Setter Property="ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Border Background="{StaticResource LiveChromeBrush}" BorderThickness="0,0,0,2" BorderBrush="{StaticResource borderBlue}"  Height="62" Margin="24,0,24,12" Padding="11,5">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Border Height="50" Width="50">
+                                    <Image  Height="33" Width="33"  Source="{Binding Key, Converter={StaticResource cImage}}"></Image>
+                                </Border>
+                                <TextBlock VerticalAlignment="Center" Margin="6,0" Grid.Column="1" Text="{Binding Key, Converter={StaticResource ResourceToStringConverter}}"  Foreground="White" FontFamily="{StaticResource PhoneFontFamilySemiLight}" FontSize="27.333"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </phone:PhoneApplicationPage.Resources>
+
+    <!--<phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar ForegroundColor="#FFFFFE" BackgroundColor="{StaticResource LiveChromeColor}">
+            <shell:ApplicationBarIconButton Click="Add_Click" IconUri="/Assets/AppBar/add.png" Text="add new"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>-->
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <phone:LongListSelector ItemsSource="{Binding Credentials}" IsGroupingEnabled="True" JumpListStyle="{StaticResource JumpListStyle}" SelectionChanged="List_SelectionChanged">
+            <phone:LongListSelector.ListHeader>
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="24" Visibility="{Binding Credentials.Count, Converter={StaticResource ItemsToVisibilityConverter}}">
+                    <TextBlock TextAlignment="Center" Text="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.nodata}" TextWrapping="Wrap" Foreground="{StaticResource PhoneSubtleBrush}" FontSize="{StaticResource PhoneFontSizeLarge}"/>
+                    <TextBlock TextAlignment="Center" Text="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.addnewitem}" TextWrapping="Wrap" Foreground="{StaticResource PhoneSubtleBrush}" FontSize="{StaticResource PhoneFontSizeLarge}"/>
+                </StackPanel>
+            </phone:LongListSelector.ListHeader>
+            <phone:LongListSelector.GroupHeaderTemplate>
+                <DataTemplate>
+                    <Border Margin="0,12,0,0" Padding="24,11,0,12" Background="#ecf0f1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Background="{StaticResource primary}" BorderBrush="{StaticResource borderBlue}" BorderThickness="0,0,0,2" Height="50" Width="50">
+                                <Image Height="33" Width="33" Source="{Binding Key, Converter={StaticResource ResourceToImageConverter}}"/>
+                            </Border>
+                            <TextBlock VerticalAlignment="Center" Margin="12,0" Grid.Column="1" Text="{Binding Key, Converter={StaticResource ResourceToStringConverter}}" Foreground="{StaticResource LiveChromeBrush}" FontFamily="{StaticResource PhoneFontFamilySemiLight}" FontSize="27.333"/>
+                        </Grid>
+                   </Border>
+                </DataTemplate>
+            </phone:LongListSelector.GroupHeaderTemplate>
+            <phone:LongListSelector.ItemTemplate>
+                <DataTemplate>
+                    <!--<Border BorderThickness="0,0,0,2" BorderBrush="{StaticResource borderGray}" Margin="24,0,24,12" Background="White">
+                        <StackPanel Orientation="Horizontal">
+                            <Border Width="62" Height="62" Background="{StaticResource primary}">
+                                <Image Source="{Binding Thumbnail}"/>
+                            </Border>
+                            <TextBlock Margin="12,0" Text="{Binding Title}" FontFamily="{StaticResource LiveFontFamily}" Foreground="#95a5a6" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>-->
+                    <Border Height="74" Margin="24,0,24,12" Background="White" BorderBrush="{StaticResource borderGray}" BorderThickness="0,0,0,2">
+                        <!--<toolkit:ContextMenuService.ContextMenu>
+                            <toolkit:ContextMenu IsZoomEnabled="False">
+                                <toolkit:MenuItem Header="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.shares}"/>
+                                <toolkit:MenuItem Header="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.delete}"/>
+                            </toolkit:ContextMenu>
+                        </toolkit:ContextMenuService.ContextMenu>-->
+                        <Grid Margin="12,5,0,2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Text="{Binding Subtitle}" Foreground="{StaticResource primary}" FontFamily="{StaticResource LiveFontFamily}" Grid.Row="1" TextTrimming="WordEllipsis"/>
+                            <TextBlock Grid.Row="0" Text="{Binding Title}" Foreground="Black" FontSize="{StaticResource PhoneFontSizeLarge}" FontFamily="{StaticResource LiveFontFamily}" Margin="0,0,0,0"/>
+
+                            <Image Margin="6,0" Grid.RowSpan="2" Source="/Images/parent.png" Height="30" Grid.Column="1"/>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </phone:LongListSelector.ItemTemplate>
+            <phone:LongListSelector.ListFooter>
+                <Border Height="36"/>
+            </phone:LongListSelector.ListFooter>
+        </phone:LongListSelector>
+        
+        <uap:CommandBar toolkit:TiltEffect.SuppressTilt="True" Background="{StaticResource LiveChromeBrush}" Foreground="White" Grid.Row="1">
+            <uap:AppBarButton Foreground="White" Click="Add_Click" Label="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.add}" Icon="Add"/>
+            <uap:CommandBar.SecondaryCommands>
+                <uap:AppBarButton Click="About_Click" Foreground="White" Label="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.about}"/>
+                <uap:AppBarButton Click="Translate_Click" Foreground="White" Label="help us with translation"/>
+                <uap:AppBarButton Click="ChangePassword_Click" Foreground="White" Label="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.changepassword}"/>
+            </uap:CommandBar.SecondaryCommands>
+        </uap:CommandBar>
+    </Grid>
+
+</phone:PhoneApplicationPage>

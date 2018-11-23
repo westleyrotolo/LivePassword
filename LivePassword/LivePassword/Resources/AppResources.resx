@@ -1,0 +1,635 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ResourceFlowDirection" xml:space="preserve">
+    <value>LeftToRight</value>
+    <comment>Controls the FlowDirection for all elements in the RootFrame. Set to the traditional direction of this resource file's language</comment>
+  </data>
+  <data name="ResourceLanguage" xml:space="preserve">
+    <value>en-US</value>
+    <comment>Controls the Language and ensures that the font for all elements in the RootFrame aligns with the app's language. Set to the language code of this resource file's language.</comment>
+  </data>
+  <data name="about" xml:space="preserve">
+    <value>about</value>
+  </data>
+  <data name="add" xml:space="preserve">
+    <value>add</value>
+  </data>
+  <data name="addimage" xml:space="preserve">
+    <value>add</value>
+  </data>
+  <data name="addnewitem" xml:space="preserve">
+    <value>add a new item</value>
+  </data>
+  <data name="cancel" xml:space="preserve">
+    <value>cancel</value>
+  </data>
+  <data name="changepassword" xml:space="preserve">
+    <value>change password</value>
+  </data>
+  <data name="clearall" xml:space="preserve">
+    <value>clear all</value>
+  </data>
+  <data name="copied" xml:space="preserve">
+    <value>Copied!</value>
+  </data>
+  <data name="copy" xml:space="preserve">
+    <value>copy</value>
+  </data>
+  <data name="creditcard" xml:space="preserve">
+    <value>Credit Card</value>
+  </data>
+  <data name="cvv" xml:space="preserve">
+    <value>CVV</value>
+  </data>
+  <data name="cvvcopied" xml:space="preserve">
+    <value>CVV copied succesfully</value>
+  </data>
+  <data name="delete" xml:space="preserve">
+    <value>delete</value>
+  </data>
+  <data name="deleted" xml:space="preserve">
+    <value>Deleted!</value>
+  </data>
+  <data name="description" xml:space="preserve">
+    <value>Archive your passwords, your notes, your files in Live Password</value>
+  </data>
+  <data name="edit" xml:space="preserve">
+    <value>edit</value>
+  </data>
+  <data name="Enter" xml:space="preserve">
+    <value>Enter</value>
+  </data>
+  <data name="excvvcreditcard" xml:space="preserve">
+    <value>ex: '555'</value>
+  </data>
+  <data name="exexpirationcreditcard" xml:space="preserve">
+    <value>ex: '12/21'</value>
+  </data>
+  <data name="exmailmail" xml:space="preserve">
+    <value>ex: 'user@example.com'</value>
+  </data>
+  <data name="exnumbercreditcard" xml:space="preserve">
+    <value>ex: '5593384738573847'</value>
+  </data>
+  <data name="expasswordlogin" xml:space="preserve">
+    <value>ex: 'password'</value>
+  </data>
+  <data name="expiration" xml:space="preserve">
+    <value>Expiration</value>
+  </data>
+  <data name="expirationcopied" xml:space="preserve">
+    <value>Expiration copied succesfully</value>
+  </data>
+  <data name="exsitesite" xml:space="preserve">
+    <value>ex: 'https://amazon.com'</value>
+  </data>
+  <data name="extextnote" xml:space="preserve">
+    <value>ex: 'text of my note'</value>
+  </data>
+  <data name="extitlecreditcard" xml:space="preserve">
+    <value>ex: 'Master Card'</value>
+  </data>
+  <data name="extitleimage" xml:space="preserve">
+    <value>ex: 'my private photo'</value>
+  </data>
+  <data name="extitlemail" xml:space="preserve">
+    <value>ex: 'Outlook'</value>
+  </data>
+  <data name="extitlenote" xml:space="preserve">
+    <value>ex: 'my private note'</value>
+  </data>
+  <data name="extitleweb" xml:space="preserve">
+    <value>ex: 'Amazon'</value>
+  </data>
+  <data name="exuserlogin" xml:space="preserve">
+    <value>ex: 'Wes'</value>
+  </data>
+  <data name="exusersite" xml:space="preserve">
+    <value>ex: 'user@example.com'</value>
+  </data>
+  <data name="exwebsitemail" xml:space="preserve">
+    <value>ex: 'https://www.outlook.com'</value>
+  </data>
+  <data name="fieldnotempty" xml:space="preserve">
+    <value>The field must not be empty</value>
+  </data>
+  <data name="goweb" xml:space="preserve">
+    <value>go to website</value>
+  </data>
+  <data name="imagedelete" xml:space="preserve">
+    <value>Image deleted succesfully</value>
+  </data>
+  <data name="images" xml:space="preserve">
+    <value>Images</value>
+  </data>
+  <data name="imagesaved" xml:space="preserve">
+    <value>Image saved in media library</value>
+  </data>
+  <data name="importpicture" xml:space="preserve">
+    <value>import picture</value>
+  </data>
+  <data name="insertnewpassword" xml:space="preserve">
+    <value>insert new password</value>
+  </data>
+  <data name="insertpassword" xml:space="preserve">
+    <value>insert password</value>
+  </data>
+  <data name="keyword" xml:space="preserve">
+    <value>Keyword</value>
+  </data>
+  <data name="login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="mail" xml:space="preserve">
+    <value>Mail</value>
+  </data>
+  <data name="mailcopied" xml:space="preserve">
+    <value>Mail copied succesfully</value>
+  </data>
+  <data name="managekey" xml:space="preserve">
+    <value>manage keywords</value>
+  </data>
+  <data name="MasterPassword" xml:space="preserve">
+    <value>Master Password</value>
+  </data>
+  <data name="modfytitle" xml:space="preserve">
+    <value>Please modify your title</value>
+  </data>
+  <data name="modifyexpiration" xml:space="preserve">
+    <value>Please modify your expiration</value>
+  </data>
+  <data name="modifymail" xml:space="preserve">
+    <value>please modify your mail</value>
+  </data>
+  <data name="modifynumer" xml:space="preserve">
+    <value>Please modify your number</value>
+  </data>
+  <data name="modifypassword" xml:space="preserve">
+    <value>Please modify your password</value>
+  </data>
+  <data name="modifytext" xml:space="preserve">
+    <value>Please modify your text</value>
+  </data>
+  <data name="modifyuser" xml:space="preserve">
+    <value>Please modify your user</value>
+  </data>
+  <data name="modifyvv" xml:space="preserve">
+    <value>Please modify your CVV</value>
+  </data>
+  <data name="modifyweb" xml:space="preserve">
+    <value>please modify your web site</value>
+  </data>
+  <data name="newkeywords" xml:space="preserve">
+    <value>Insert new keyword</value>
+  </data>
+  <data name="nodata" xml:space="preserve">
+    <value>no data to display</value>
+  </data>
+  <data name="nokeywords" xml:space="preserve">
+    <value>no keywords</value>
+  </data>
+  <data name="note" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="number" xml:space="preserve">
+    <value>Number</value>
+  </data>
+  <data name="numbercopied" xml:space="preserve">
+    <value>Number copied succesfully</value>
+  </data>
+  <data name="password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="passwordcopied" xml:space="preserve">
+    <value>Password copied succesfully</value>
+  </data>
+  <data name="passwordincorrect" xml:space="preserve">
+    <value>Password incorrrect.</value>
+  </data>
+  <data name="passwordnotmatch" xml:space="preserve">
+    <value>password do not match</value>
+  </data>
+  <data name="pCreditCard" xml:space="preserve">
+    <value>+Credit Card</value>
+  </data>
+  <data name="photo" xml:space="preserve">
+    <value> images</value>
+  </data>
+  <data name="pImages" xml:space="preserve">
+    <value>+Images</value>
+  </data>
+  <data name="pLogin" xml:space="preserve">
+    <value>+Login</value>
+  </data>
+  <data name="pmail" xml:space="preserve">
+    <value>+Mail</value>
+  </data>
+  <data name="pnote" xml:space="preserve">
+    <value>+Note</value>
+  </data>
+  <data name="pWebSite" xml:space="preserve">
+    <value>+Web Site</value>
+  </data>
+  <data name="repeatpassword" xml:space="preserve">
+    <value>repeat password</value>
+  </data>
+  <data name="repeatpasswowrd" xml:space="preserve">
+    <value>repeat new password</value>
+  </data>
+  <data name="save" xml:space="preserve">
+    <value>save</value>
+  </data>
+  <data name="saved" xml:space="preserve">
+    <value>Saved!</value>
+  </data>
+  <data name="sharecreditcard" xml:space="preserve">
+    <value>Share credit card information.</value>
+  </data>
+  <data name="sharelogin" xml:space="preserve">
+    <value>Share login information.</value>
+  </data>
+  <data name="sharemail" xml:space="preserve">
+    <value>Share mail information.</value>
+  </data>
+  <data name="sharenote" xml:space="preserve">
+    <value>Share note information.</value>
+  </data>
+  <data name="shares" xml:space="preserve">
+    <value>share</value>
+  </data>
+  <data name="sharesite" xml:space="preserve">
+    <value>Share site web information.</value>
+  </data>
+  <data name="sitecopied" xml:space="preserve">
+    <value>Web Site copied succesfully</value>
+  </data>
+  <data name="tapword" xml:space="preserve">
+    <value>Tap word to delete</value>
+  </data>
+  <data name="Text" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="textcopied" xml:space="preserve">
+    <value>Text copied succesfully</value>
+  </data>
+  <data name="title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="titlecopied" xml:space="preserve">
+    <value>Title copied succesfully</value>
+  </data>
+  <data name="user" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="usercopied" xml:space="preserve">
+    <value>User copied succesfully</value>
+  </data>
+  <data name="website" xml:space="preserve">
+    <value>WebSite</value>
+  </data>
+  <data name="confirm" xml:space="preserve">
+    <value>confirm</value>
+  </data>
+  <data name="extitlelogin" xml:space="preserve">
+    <value>ex: 'my notebook'</value>
+  </data>
+  <data name="FileSalvato" xml:space="preserve">
+    <value>File saved in OneDrive root's</value>
+  </data>
+  <data name="nocryptonedrive" xml:space="preserve">
+    <value>The data will be saved in a text file is not encrypted in your account OneDrive</value>
+  </data>
+  <data name="Purchase" xml:space="preserve">
+    <value>Purchase full version</value>
+  </data>
+  <data name="Trial" xml:space="preserve">
+    <value>Trial Version</value>
+  </data>
+  <data name="uploadOneDrive" xml:space="preserve">
+    <value>upload on OneDrive</value>
+  </data>
+  <data name="buyfullversion" xml:space="preserve">
+    <value>Keep your files safe. Add the ability to archive any type of file in live password. Upgrade to Professional at a cost of 1,49USD</value>
+  </data>
+  <data name="addfile" xml:space="preserve">
+    <value>add file</value>
+  </data>
+  <data name="extitlefile" xml:space="preserve">
+    <value>ex: 'my private files'</value>
+  </data>
+  <data name="audio" xml:space="preserve">
+    <value>Audio</value>
+  </data>
+  <data name="files" xml:space="preserve">
+    <value>Files</value>
+  </data>
+  <data name="office" xml:space="preserve">
+    <value>Office</value>
+  </data>
+  <data name="video" xml:space="preserve">
+    <value>Video</value>
+  </data>
+  <data name="pFiles" xml:space="preserve">
+    <value>+Files</value>
+  </data>
+  <data name="cDelete" xml:space="preserve">
+    <value>delete</value>
+  </data>
+  <data name="cOpen" xml:space="preserve">
+    <value>open</value>
+  </data>
+  <data name="cShare" xml:space="preserve">
+    <value>share</value>
+  </data>
+  <data name="filedeleted" xml:space="preserve">
+    <value>file deleted succesfully</value>
+  </data>
+  <data name="pAudio" xml:space="preserve">
+    <value>+Audio</value>
+  </data>
+  <data name="pOffice" xml:space="preserve">
+    <value>+Documenti</value>
+  </data>
+  <data name="pVideo" xml:space="preserve">
+    <value>+Video</value>
+  </data>
+  <data name="importfile" xml:space="preserve">
+    <value>import files</value>
+  </data>
+  <data name="expincreditcard" xml:space="preserve">
+    <value>ex: '5429'</value>
+  </data>
+  <data name="pin" xml:space="preserve">
+    <value>PIN</value>
+  </data>
+  <data name="pincopied" xml:space="preserve">
+    <value>PIN copied succesfully</value>
+  </data>
+  <data name="documents" xml:space="preserve">
+    <value>Documents</value>
+  </data>
+  <data name="category" xml:space="preserve">
+    <value>Class</value>
+  </data>
+  <data name="code" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="dateofbirth" xml:space="preserve">
+    <value>Date of Birth</value>
+  </data>
+  <data name="driverlicense" xml:space="preserve">
+    <value>Driver License</value>
+  </data>
+  <data name="exdriverclass" xml:space="preserve">
+    <value>ex: 'D'</value>
+  </data>
+  <data name="exdriverexpires" xml:space="preserve">
+    <value>ex: '08/22'</value>
+  </data>
+  <data name="exdriverissued" xml:space="preserve">
+    <value>ex: '08/12'</value>
+  </data>
+  <data name="exdrivername" xml:space="preserve">
+    <value>ex: 'Westley Rotolo'</value>
+  </data>
+  <data name="exdrivernumber" xml:space="preserve">
+    <value>ex: 'FJEK34S'</value>
+  </data>
+  <data name="exidentitydateofbirth" xml:space="preserve">
+    <value>ex: '02/92'</value>
+  </data>
+  <data name="exidentityexpires" xml:space="preserve">
+    <value>ex: '08/22'</value>
+  </data>
+  <data name="exidentityissued" xml:space="preserve">
+    <value>ex: '08/12'</value>
+  </data>
+  <data name="exidentityname" xml:space="preserve">
+    <value>ex: 'Westley Rotolo'</value>
+  </data>
+  <data name="exidentitynumber" xml:space="preserve">
+    <value>ex: 'TFJE3D'</value>
+  </data>
+  <data name="exidentityplaceofbirth" xml:space="preserve">
+    <value>ex: 'New York'</value>
+  </data>
+  <data name="expassportdateofbirth" xml:space="preserve">
+    <value>ex: '02/92'</value>
+  </data>
+  <data name="expassportexpires" xml:space="preserve">
+    <value>ex: '08/22'</value>
+  </data>
+  <data name="expassportissued" xml:space="preserve">
+    <value>ex: '08/12'</value>
+  </data>
+  <data name="expassportname" xml:space="preserve">
+    <value>ex: 'Westley Rotolo'</value>
+  </data>
+  <data name="expassportnationality" xml:space="preserve">
+    <value>ex: 'Italian'</value>
+  </data>
+  <data name="expassportnumber" xml:space="preserve">
+    <value>ex: 'MJKSI3S'</value>
+  </data>
+  <data name="expassportplaceofbirth" xml:space="preserve">
+    <value>ex: 'New York'</value>
+  </data>
+  <data name="expires" xml:space="preserve">
+    <value>Expires</value>
+  </data>
+  <data name="exrouterpassword" xml:space="preserve">
+    <value>ex: 'password'</value>
+  </data>
+  <data name="exrouterssid" xml:space="preserve">
+    <value>ex: 'Telecom-83470'</value>
+  </data>
+  <data name="exroutertitle" xml:space="preserve">
+    <value>ex: 'Home's Router'</value>
+  </data>
+  <data name="exssncode" xml:space="preserve">
+    <value>ex: 'RUSJ839DSI3JFCA0'</value>
+  </data>
+  <data name="exssnexpires" xml:space="preserve">
+    <value>ex: '08/22'</value>
+  </data>
+  <data name="exssnname" xml:space="preserve">
+    <value>ex: 'Westley Rotolo'</value>
+  </data>
+  <data name="identitycard" xml:space="preserve">
+    <value>Identity Card</value>
+  </data>
+  <data name="issued" xml:space="preserve">
+    <value>Issued</value>
+  </data>
+  <data name="name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="nationality" xml:space="preserve">
+    <value>Nationality</value>
+  </data>
+  <data name="passport" xml:space="preserve">
+    <value>Passport</value>
+  </data>
+  <data name="placeofbirth" xml:space="preserve">
+    <value>Place of Birth</value>
+  </data>
+  <data name="router" xml:space="preserve">
+    <value>Router</value>
+  </data>
+  <data name="socialsecuritynumber" xml:space="preserve">
+    <value>Social Security Number</value>
+  </data>
+  <data name="SSID" xml:space="preserve">
+    <value>SSID</value>
+  </data>
+  <data name="Identity" xml:space="preserve">
+    <value>Identity</value>
+  </data>
+  <data name="pDriverLicense" xml:space="preserve">
+    <value>+Driver License</value>
+  </data>
+  <data name="pIdentityCard" xml:space="preserve">
+    <value>+Identity Card</value>
+  </data>
+  <data name="pPassport" xml:space="preserve">
+    <value>+Passport</value>
+  </data>
+  <data name="pRouter" xml:space="preserve">
+    <value>+Router</value>
+  </data>
+  <data name="pSocialSecurityNumber" xml:space="preserve">
+    <value>+Social Security Number</value>
+  </data>
+  <data name="hide" xml:space="preserve">
+    <value>hide</value>
+  </data>
+  <data name="show" xml:space="preserve">
+    <value>show</value>
+  </data>
+  <data name="Credentials" xml:space="preserve">
+    <value>Credentials</value>
+  </data>
+  <data name="deletestring" xml:space="preserve">
+    <value>Are you sure you want to delete this credential?</value>
+  </data>
+  <data name="LivePasswordPro" xml:space="preserve">
+    <value>Live Password Professional</value>
+  </data>
+</root>

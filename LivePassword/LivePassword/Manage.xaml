@@ -1,0 +1,98 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="LivePassword.Manage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:telerikPrimitives="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Primitives"
+      xmlns:telerikCore="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Core"
+    xmlns:local="clr-namespace:LivePassword"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+ 
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="False">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <telerikPrimitives:RadTransitionControl.Transition>
+        <telerikPrimitives:RadScaleTransition PlayMode="Simultaneously"/>
+    </telerikPrimitives:RadTransitionControl.Transition>
+    <!--LayoutRoot è la griglia radice in cui viene inserito tutto il contenuto della pagina-->
+    <Grid x:Name="LayoutRoot" Background="#ecf0f1">
+        <Grid.Resources>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Background="{StaticResource primary}" Height="30">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Image Source="Images/lock.png" Margin="0,0"></Image>
+            <TextBlock Text="Live Password" Grid.Column="1" VerticalAlignment="Center" FontFamily="GothamNarrow-Light.ttf#Gotham"></TextBlock>
+            <TextBlock Margin="5,0" Text="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.managekey}" Grid.Column="1" VerticalAlignment="Center" FontFamily="GothamNarrow-Light.ttf#Gotham" HorizontalAlignment="Right"></TextBlock>
+        </Grid>
+        <!--ContentPanel - place additional content here
+        -->
+        <Grid Background="#ecf0f1" x:Name="ContentPanel" Grid.Row="1" Margin="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" HorizontalAlignment="Right" FontSize="15" Text="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.tapword}" Margin="10,0,5,0" Foreground="Gray"></TextBlock>
+            <telerikPrimitives:RadDataBoundListBox
+                HorizontalContentAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                Margin="10,0"
+                Grid.Column="0"
+                Grid.Row="1"
+             toolkit:TiltEffect.IsTiltEnabled="True"   
+                EmptyContent="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.nokeywords}"  
+             IsCheckModeEnabled="False"
+                Name="items"
+                
+                >
+                <telerikPrimitives:RadDataBoundListBox.VirtualizationStrategyDefinition>
+                    <telerikPrimitives:WrapVirtualizationStrategyDefinition  Orientation="Horizontal"></telerikPrimitives:WrapVirtualizationStrategyDefinition>
+                </telerikPrimitives:RadDataBoundListBox.VirtualizationStrategyDefinition>
+                <telerikPrimitives:RadDataBoundListBox.ItemAddedAnimation>
+                    <telerikCore:RadScaleAndFadeAnimation Duration="0:0:1">
+                        <telerikCore:RadScaleAndFadeAnimation.Easing>
+                            <CubicEase EasingMode="EaseOut"/>
+                        </telerikCore:RadScaleAndFadeAnimation.Easing>
+                    </telerikCore:RadScaleAndFadeAnimation>
+                </telerikPrimitives:RadDataBoundListBox.ItemAddedAnimation>
+                <!--<telerikPrimitives:RadDataBoundListBox.ItemRemovedAnimation>
+                    <telerikCore:RadScaleAndFadeAnimation  Duration="0:0:.5">
+                    </telerikCore:RadScaleAndFadeAnimation>
+                </telerikPrimitives:RadDataBoundListBox.ItemRemovedAnimation>-->
+                <telerikPrimitives:RadDataBoundListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="{StaticResource borderGray}" BorderThickness="0,0,0,2" Background="White" Margin="0,10" Width="460" Tap="Border_Tap"  HorizontalAlignment="Stretch">
+
+                            <TextBlock Grid.Row="1" HorizontalAlignment="Stretch" Margin="12,6" FontSize="30" Text="{Binding}" Foreground="Gray" FontFamily="GothamNarrow-Light.ttf#Gotham">
+                            </TextBlock>
+                  
+                            </Border>
+                    </DataTemplate>
+                </telerikPrimitives:RadDataBoundListBox.ItemTemplate>
+            </telerikPrimitives:RadDataBoundListBox>
+        </Grid>
+    </Grid>
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" ForegroundColor="White"  IsMenuEnabled="False" BackgroundColor="{StaticResource BackgroundColor}">
+            <shell:ApplicationBarIconButton Click="ApplicationBarIconButton_Click" IconUri="/Images/Delete.png" Text="clear all"></shell:ApplicationBarIconButton>
+            <shell:ApplicationBarIconButton Click="ApplicationBarIconButton_Click_1" IconUri="/Images/Add.png" Text="Add"></shell:ApplicationBarIconButton>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+</phone:PhoneApplicationPage>

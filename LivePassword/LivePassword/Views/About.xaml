@@ -1,0 +1,97 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="LivePassword.About"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:LivePassword.ViewModels"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="False">
+
+    <Grid x:Name="LayoutRoot" Background="#ecf0f1">
+        <Grid.DataContext>
+            <viewModels:CommandSampleViewModel/>
+        </Grid.DataContext>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock      FontFamily="GothamNarrow-Light.ttf#Gotham" Foreground="{StaticResource primary}" x:Name="ApplicationTitle" Text="Live Password" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock      FontFamily="GothamNarrow-Light.ttf#Gotham" Foreground="{StaticResource primary}" x:Name="PageTitle" Text="about" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        </StackPanel>
+
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            
+            <StackPanel>
+                <TextBlock 
+                    Text="Live Password" 
+                    Margin="12,0,12,0" 
+                    Foreground="{StaticResource primary}"
+                    FontSize="{StaticResource PhoneFontSizeLarge}" 
+                    FontFamily="GothamNarrow-Light.ttf#Gotham"
+                    />
+                <TextBlock      FontFamily="GothamNarrow-Light.ttf#Gotham"
+                    Text="10.0.0.0" 
+                    Foreground="Gray"
+                    Margin="12,0,12,0" 
+                    FontSize="{StaticResource PhoneFontSizeNormal}"/>
+            </StackPanel>
+
+            <TextBlock      FontFamily="GothamNarrow-Light.ttf#Gotham"
+                Grid.Row="1" 
+                Text="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.description}"
+                Margin="12,24,12,24" 
+                TextWrapping="Wrap" 
+                Foreground="Gray" 
+                FontSize="{StaticResource PhoneFontSizeNormal}" />
+            <HyperlinkButton 
+                Grid.Row="2" 
+                Content="technical support/feedback email" 
+                Margin="0,12,0,0" 
+                HorizontalAlignment="Left" 
+                Foreground="{StaticResource PhoneAccentBrush}" 
+                FontSize="{StaticResource PhoneFontSizeNormal}" 
+                Command="{Binding SendAnEmailCommand}"/>
+            <HyperlinkButton 
+                Grid.Row="3"
+                Content="rate this app" 
+                Margin="0,12,0,0" 
+                HorizontalAlignment="Left" 
+                Foreground="{StaticResource PhoneAccentBrush}" 
+                FontSize="{StaticResource PhoneFontSizeNormal}" 
+                Command="{Binding RateThisAppCommand}"/>
+            <StackPanel Grid.Row="4" Margin="12,0,12,50" VerticalAlignment="Bottom">
+
+                <TextBlock       FontFamily="GothamNarrow-Light.ttf#Gotham"
+                    Foreground="{StaticResource primary}"
+                    Text="Copyright 2014 Live Password" 
+                    Margin="0,0,0,6" 
+                    FontSize="{StaticResource PhoneFontSizeNormal}"/>
+                 <HyperlinkButton Click="WesClick" HorizontalContentAlignment="Left"      FontFamily="GothamNarrow-Light.ttf#Gotham"
+                    Foreground="{StaticResource primary}" Margin="-12,6"
+                    Content="Westley Rotolo" HorizontalAlignment="Left" 
+                    FontSize="{StaticResource PhoneFontSizeNormal}"/>
+             <HyperlinkButton Click="FelaClick" HorizontalContentAlignment="Left"      FontFamily="GothamNarrow-Light.ttf#Gotham"
+                    Foreground="{StaticResource primary}" Margin="-12,6"
+                    Content="Fela Ameghino" HorizontalAlignment="Left" 
+                    FontSize="{StaticResource PhoneFontSizeNormal}"/>
+              </StackPanel>
+        </Grid>
+    </Grid>
+    
+</phone:PhoneApplicationPage>

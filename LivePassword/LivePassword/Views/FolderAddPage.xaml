@@ -1,0 +1,177 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="LivePassword.Views.FolderAddPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:viewModels="clr-namespace:LivePassword.ViewModels"
+    xmlns:converters="clr-namespace:LivePassword.Converters"
+    xmlns:controls="clr-namespace:LivePassword.Controls"
+    xmlns:common="clr-namespace:LivePassword.Common"
+    xmlns:local="clr-namespace:LivePassword"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:uap="clr-namespace:Windows.UI.Xaml.Controls;assembly=Windows.UI.Xaml"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="False"
+    toolkit:TiltEffect.IsTiltEnabled="True"
+    controls:LiveApplicationFrame.PageTitle="{Binding Id, Converter={StaticResource ResourceToStringConverter}, ConverterParameter='+'}">
+
+    <toolkit:TransitionService.NavigationInTransition>
+        <toolkit:NavigationInTransition>
+            <toolkit:NavigationInTransition.Backward>
+                <toolkit:SlideTransition Mode="SlideUpFadeIn"/>
+            </toolkit:NavigationInTransition.Backward>
+            <toolkit:NavigationInTransition.Forward>
+                <toolkit:SlideTransition Mode="SlideDownFadeIn" />
+            </toolkit:NavigationInTransition.Forward>
+        </toolkit:NavigationInTransition>
+    </toolkit:TransitionService.NavigationInTransition>
+    <toolkit:TransitionService.NavigationOutTransition>
+        <toolkit:NavigationOutTransition>
+            <toolkit:NavigationOutTransition.Backward>
+                <toolkit:SlideTransition Mode="SlideUpFadeOut"/>
+            </toolkit:NavigationOutTransition.Backward>
+            <toolkit:NavigationOutTransition.Forward>
+                <toolkit:SlideTransition Mode="SlideDownFadeOut"/>
+            </toolkit:NavigationOutTransition.Forward>
+        </toolkit:NavigationOutTransition>
+    </toolkit:TransitionService.NavigationOutTransition>
+
+    <phone:PhoneApplicationPage.DataContext>
+        <viewModels:FolderViewModel/>
+    </phone:PhoneApplicationPage.DataContext>
+
+    <Grid x:Name="LayoutRoot" Background="#ecf0f1">
+        <Grid.Resources>
+            <local:filedatamodel x:Key="filemodel"/>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <!--<telerikPrimitives:RadTextBox InputScope="Chat" Margin="12,0" Name="txttitle" Header="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.title}" Watermark="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.extitlefile}">
+                <telerikPrimitives:RadTextBox.HeaderTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" Foreground="{StaticResource primary}"/>
+                    </DataTemplate>
+                </telerikPrimitives:RadTextBox.HeaderTemplate>
+            </telerikPrimitives:RadTextBox>-->
+
+        <StackPanel Margin="12,24,12,0">
+            <TextBlock Text="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.title}" Style="{StaticResource PhoneTextSubtleStyle}" Foreground="{StaticResource primary}" Margin="12,0,12,-6"/>
+            <controls:PlatformTextBox  ValidationText="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.fieldnotempty}" x:Name="txttitle" IsValid="{Binding IsValid, Mode=TwoWay}" Text="{Binding Title, Mode=TwoWay}" PlaceholderText="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.extitlefile}" InputScope="Chat"/>
+        </StackPanel>
+
+
+        <phone:LongListSelector Grid.Row="1" 
+                ItemsSource="{Binding Files}"
+                Name="items">
+            <phone:LongListSelector.ListHeader>
+                <!--<Border Name="brdAddFile" Tap="Border_Tap"   toolkit:TiltEffect.IsTiltEnabled="True"    Margin="24,6" BorderThickness="0,0,0,3" BorderBrush="#1c5981" CornerRadius="0" Background="{StaticResource primary}" Grid.Row="3">
+                        <TextBlock Margin="12,6" FontFamily="GothamNarrow-Light.ttf#Gotham" TextAlignment="Center" FontSize="25" Text="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.addfile}" ></TextBlock>
+                    </Border>-->
+                <Button Click="AddFile_Click" VerticalAlignment="Top" Content="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.addfile}" Style="{StaticResource LivePasswordButtonStyle}" Margin="12,0,12,12"/>
+            </phone:LongListSelector.ListHeader>
+            <!--EmptyContent="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.importpicture}"-->
+            <phone:LongListSelector.ItemTemplate>
+                <DataTemplate>
+                    <!--<Border Margin="24,6" BorderThickness="0,0,0,2" BorderBrush="{StaticResource borderGray}"    toolkit:TiltEffect.IsTiltEnabled="True" Background="White" CornerRadius="0">
+                            <telerikPrimitives:RadContextMenu.ContextMenu>
+                                <telerikPrimitives:RadContextMenu OpenGesture="Tap" IsFadeEnabled="False" x:Name="ctxmenu2"  
+                                          IsZoomEnabled="False">
+                                    <telerikPrimitives:RadContextMenuItem Content="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.cOpen}" 
+                                                  Tapped="RadContextMenuItem_Tapped_2"/>
+                                    <telerikPrimitives:RadContextMenuItem Content="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.cDelete}"
+                                                  Tapped="RadContextMenuItem_Tapped_4"/>
+                                </telerikPrimitives:RadContextMenu>
+                            </telerikPrimitives:RadContextMenu.ContextMenu>
+                            <Grid Tap="Grid_Tap">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Border VerticalAlignment="Stretch" Grid.RowSpan="3" Background="Gray" Margin="0,0,12,0">
+                                    <Image  Width="62" Height="60" Source="{Binding thumbnail, Converter={StaticResource TypeFile}}"></Image>
+                                </Border>
+                                <TextBlock FontSize="20" FontFamily="GothamNarrow-Light.ttf#Gotham" Foreground="Black" Grid.Column="1" Text="{Binding _name}"></TextBlock>
+                                <TextBlock FontSize="18" FontFamily="GothamNarrow-Light.ttf#Gotham"  Foreground="Gray" Grid.Column="1" Grid.Row="1" Text="{Binding lastmodifica}"></TextBlock>
+                                <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
+                                    <TextBlock FontSize="15" FontFamily="GothamNarrow-Light.ttf#Gotham"  Foreground="Gray" Text="{Binding dimension, Converter={StaticResource bytes}}"/>
+                                    <TextBlock FontSize="15" FontFamily="GothamNarrow-Light.ttf#Gotham"  Foreground="Gray" Text=", "/>
+                                    <TextBlock FontSize="15" FontFamily="GothamNarrow-Light.ttf#Gotham"  Foreground="Gray" Text="{Binding type}"/>
+                                </StackPanel>
+                                <Image VerticalAlignment="Center" Margin="5" Grid.RowSpan="3" Source="/Images/parent.png" Height="30" Grid.Column="2"></Image>
+
+                            </Grid>
+                        </Border>-->
+
+                    <Border Height="74" Margin="24,0,24,12" Background="White" BorderBrush="{StaticResource borderGray}" BorderThickness="0,0,0,2">
+                        <toolkit:ContextMenuService.ContextMenu>
+                            <toolkit:ContextMenu IsZoomEnabled="False" Gesture="Tap">
+                                <toolkit:MenuItem Click="Open_Click" Header="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.cOpen}"/>
+                                <toolkit:MenuItem Click="Delete_Click" Header="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.delete}"/>
+                            </toolkit:ContextMenu>
+                        </toolkit:ContextMenuService.ContextMenu>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Border VerticalAlignment="Stretch" Width="66" Background="{StaticResource PhoneChromeBrush}">
+                                <Image  Width="33" Height="33" Source="{Binding Extension, Converter={StaticResource TypeFile}}"/>
+                            </Border>
+
+                            <Grid Margin="12,8,12,2" Grid.Column="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <TextBlock FontFamily="GothamNarrow-Light.ttf#Gotham"  Foreground="{StaticResource primary}" Grid.Column="1" Grid.Row="1" Text="{Binding ItemDate}"></TextBlock>
+                                <TextBlock Foreground="{StaticResource primary}" FontFamily="{StaticResource LiveFontFamily}" Grid.Row="1">
+                                        <Run Text="{Binding Size, Converter={StaticResource bytes}}"/><Run Text=","/>
+                                        <Run Text="{Binding Extension}"/>
+                                </TextBlock>
+                                <TextBlock Grid.ColumnSpan="2" Grid.Row="0" Text="{Binding DisplayName}" Foreground="Black" FontSize="{StaticResource PhoneFontSizeLarge}" FontFamily="{StaticResource LiveFontFamily}" Margin="0,0,0,0"/>
+
+                                <Image Margin="6,0" Grid.RowSpan="2" Source="/Images/parent.png" Height="30" Grid.Column="1"/>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </phone:LongListSelector.ItemTemplate>
+        </phone:LongListSelector>
+
+        <uap:CommandBar  toolkit:TiltEffect.SuppressTilt="True" Background="{StaticResource LiveChromeBrush}" Foreground="White" Grid.Row="2">
+            <uap:AppBarButton Foreground="White" Label="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.confirm}" Command="{Binding SaveCommand}"  Character="&#xE10B;"/>
+            <uap:AppBarButton Foreground="White" Label="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.cancel}" Click="Cancel_Click"  Icon="Cancel"/>
+        </uap:CommandBar>
+    </Grid>
+
+    <!--<phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" ForegroundColor="White"  IsMenuEnabled="True" BackgroundColor="{StaticResource BackgroundColor}">
+            <shell:ApplicationBarIconButton Click="ApplicationBarIconButton_Click" IconUri="/Images/Check.png" Text="Confirm"></shell:ApplicationBarIconButton>
+            <shell:ApplicationBarIconButton Click="ApplicationBarIconButton_Click_1" IconUri="/Images/Cancel.png" Text="Cancel"></shell:ApplicationBarIconButton>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>-->
+
+</phone:PhoneApplicationPage>

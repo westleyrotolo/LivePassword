@@ -1,0 +1,149 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="LivePassword.View.pageCreditCard"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:telerikPrimitives="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Primitives"
+    xmlns:telerikCore="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Core"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:controls="clr-namespace:LivePassword.Controls"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="False"
+    controls:LiveApplicationFrame.PageTitle="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.creditcard}">
+    
+    <telerikPrimitives:RadTransitionControl.Transition>
+        <telerikPrimitives:RadScaleTransition PlayMode="Consecutively"/>
+    </telerikPrimitives:RadTransitionControl.Transition>
+
+    <Grid x:Name="LayoutRoot" Background="#ecf0f1">
+        <Grid x:Name="ContentPanel" Margin="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Border Tap="Border_Tap" toolkit:TiltEffect.IsTiltEnabled="True"    Margin="12,6" Background="White"  BorderBrush="{StaticResource borderGray}" BorderThickness="0,0,0,2">
+                <telerikPrimitives:RadContextMenu.ContextMenu>
+                    <telerikPrimitives:RadContextMenu IsFadeEnabled="False" Name="ctxmenu"
+                                          IsZoomEnabled="False">
+                        <telerikPrimitives:RadContextMenuItem Content="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.copy}" 
+                                                  Tapped="RadContextMenuItem_Tapped"/>
+                        <telerikPrimitives:RadContextMenuItem Content="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.edit}"
+                                                  Tapped="RadContextMenuItem_Tapped_1"/>
+                    </telerikPrimitives:RadContextMenu>
+                </telerikPrimitives:RadContextMenu.ContextMenu>
+                <Grid Margin="0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.title}" FontSize="20"  Foreground="{StaticResource primary}" Margin="10,0" FontFamily="GothamNarrow-Light.ttf#Gotham"></TextBlock>
+                <TextBlock Grid.Row="1" Text="{Binding title}" Foreground="Black" FontSize="30" Margin="10,0" FontFamily="GothamNarrow-Light.ttf#Gotham"></TextBlock>
+
+                    <Image Grid.RowSpan="2" Margin="5" Source="/Images/parent.png" Height="30" Grid.Column="1"></Image>
+
+                </Grid>
+            </Border>
+            <Border Tap="Border_Tap_1" Grid.Row="1"   toolkit:TiltEffect.IsTiltEnabled="True"    Margin="12,6" Background="White" BorderBrush="{StaticResource borderGray}" BorderThickness="0,0,0,2">
+                <telerikPrimitives:RadContextMenu.ContextMenu>
+                    <telerikPrimitives:RadContextMenu IsFadeEnabled="False" Name="ctxmenu1"
+                                          IsZoomEnabled="False">
+                        <telerikPrimitives:RadContextMenuItem Content="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.copy}" 
+                                                  Tapped="RadContextMenuItem_Tapped_2"/>
+                        <telerikPrimitives:RadContextMenuItem Content="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.edit}"
+                                                  Tapped="RadContextMenuItem_Tapped_3"/>
+                    </telerikPrimitives:RadContextMenu>
+                </telerikPrimitives:RadContextMenu.ContextMenu>
+                <Grid Margin="0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.number}" FontSize="20"   Foreground="{StaticResource primary}" Margin="10,0" FontFamily="GothamNarrow-Light.ttf#Gotham"></TextBlock>
+
+                <TextBlock Grid.Row="1" Text="{Binding number}" Foreground="Black" FontSize="30" Margin="10,0" FontFamily="GothamNarrow-Light.ttf#Gotham"></TextBlock>
+
+                    <Image Grid.RowSpan="2" Margin="5" Source="/Images/parent.png" Height="30" Grid.Column="1"></Image>
+
+                </Grid>
+            </Border>
+            <Border Tap="Border_Tap_2" Grid.Row="2"   toolkit:TiltEffect.IsTiltEnabled="True"    Margin="12,6" Background="White"  BorderBrush="{StaticResource borderGray}" BorderThickness="0,0,0,2">
+                <telerikPrimitives:RadContextMenu.ContextMenu>
+                    <telerikPrimitives:RadContextMenu IsFadeEnabled="False" Name="ctxmenu3"
+                                          IsZoomEnabled="False">
+                        <telerikPrimitives:RadContextMenuItem Content="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.copy}" 
+                                                  Tapped="RadContextMenuItem_Tapped_4"/>
+                        <telerikPrimitives:RadContextMenuItem Content="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.edit}"
+                                                  Tapped="RadContextMenuItem_Tapped_5"/>
+                    </telerikPrimitives:RadContextMenu>
+                </telerikPrimitives:RadContextMenu.ContextMenu>
+                <Grid Margin="0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.expiration}" FontSize="20"  Foreground="{StaticResource primary}" Margin="10,0" FontFamily="GothamNarrow-Light.ttf#Gotham"></TextBlock>
+                <TextBlock Grid.Row="1" Text="{Binding scadenza}" Foreground="Black" FontSize="30" Margin="10,0" FontFamily="GothamNarrow-Light.ttf#Gotham"></TextBlock>
+
+                    <Image Grid.RowSpan="2" Margin="5" Source="/Images/parent.png" Height="30" Grid.Column="1"></Image>
+
+                </Grid>
+            </Border>
+            <Border Tap="Border_Tap_3" Grid.Row="3"   toolkit:TiltEffect.IsTiltEnabled="True"    Margin="12,6" Background="White"  BorderBrush="{StaticResource borderGray}" BorderThickness="0,0,0,2">
+                <telerikPrimitives:RadContextMenu.ContextMenu>
+                    <telerikPrimitives:RadContextMenu IsFadeEnabled="False" Name="ctxmenu4"
+                                          IsZoomEnabled="False">
+                        <telerikPrimitives:RadContextMenuItem Content="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.copy}" 
+                                                  Tapped="RadContextMenuItem_Tapped_6"/>
+                        <telerikPrimitives:RadContextMenuItem Content="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.edit}"
+                                                  Tapped="RadContextMenuItem_Tapped_7"/>
+                    </telerikPrimitives:RadContextMenu>
+                </telerikPrimitives:RadContextMenu.ContextMenu>
+                <Grid Margin="0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.cvv}" FontSize="20"  Foreground="{StaticResource primary}" Margin="10,0" FontFamily="GothamNarrow-Light.ttf#Gotham"></TextBlock>
+                <TextBlock Grid.Row="1" Text="{Binding cvc}" Foreground="Black" FontSize="30" Margin="10,0" FontFamily="GothamNarrow-Light.ttf#Gotham"></TextBlock>
+                <Image Grid.RowSpan="2" Margin="5" Source="/Images/parent.png" Height="30" Grid.Column="1"></Image>
+
+        </Grid>
+        </Border>
+
+    </Grid>
+    </Grid>
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" ForegroundColor="White"  IsMenuEnabled="False" BackgroundColor="{StaticResource BackgroundColor}">
+            <shell:ApplicationBarIconButton Click="ApplicationBarIconButton_Click" IconUri="/Images/Delete.png" Text="Delete"></shell:ApplicationBarIconButton>
+            <shell:ApplicationBarIconButton Click="ApplicationBarIconButton_Click_1" IconUri="/Images/appbar.share.png" Text="Share"></shell:ApplicationBarIconButton>
+
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+</phone:PhoneApplicationPage>

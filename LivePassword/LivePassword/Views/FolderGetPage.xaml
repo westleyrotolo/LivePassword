@@ -1,0 +1,285 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="LivePassword.Views.FolderGetPage"
+     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:viewModels="clr-namespace:LivePassword.ViewModels"
+    xmlns:converters="clr-namespace:LivePassword.Converters"
+    xmlns:controls="clr-namespace:LivePassword.Controls"
+    xmlns:common="clr-namespace:LivePassword.Common"
+    xmlns:uap="clr-namespace:Windows.UI.Xaml.Controls;assembly=Windows.UI.Xaml"
+    xmlns:abu="clr-namespace:AppBarUtils;assembly=AppBarUtils"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:core="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="False"
+    toolkit:TiltEffect.IsTiltEnabled="True"
+    controls:LiveApplicationFrame.PageTitle="{Binding Id, Converter={StaticResource ResourceToStringConverter}}">
+
+    <toolkit:TransitionService.NavigationInTransition>
+        <toolkit:NavigationInTransition>
+            <toolkit:NavigationInTransition.Backward>
+                <toolkit:SlideTransition Mode="SlideUpFadeIn"/>
+            </toolkit:NavigationInTransition.Backward>
+            <toolkit:NavigationInTransition.Forward>
+                <toolkit:SlideTransition Mode="SlideDownFadeIn" />
+            </toolkit:NavigationInTransition.Forward>
+        </toolkit:NavigationInTransition>
+    </toolkit:TransitionService.NavigationInTransition>
+    <toolkit:TransitionService.NavigationOutTransition>
+        <toolkit:NavigationOutTransition>
+            <toolkit:NavigationOutTransition.Backward>
+                <toolkit:SlideTransition Mode="SlideUpFadeOut"/>
+            </toolkit:NavigationOutTransition.Backward>
+            <toolkit:NavigationOutTransition.Forward>
+                <toolkit:SlideTransition Mode="SlideDownFadeOut"/>
+            </toolkit:NavigationOutTransition.Forward>
+        </toolkit:NavigationOutTransition>
+    </toolkit:TransitionService.NavigationOutTransition>
+
+    <phone:PhoneApplicationPage.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <Style x:Key="AppBarButtonStyle1" TargetType="uap:AppBarButton">
+            <Setter Property="Foreground" Value="{StaticResource SystemControlForegroundBaseHighBrush}"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="FontFamily" Value="{StaticResource SymbolThemeFontFamily}"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="Width" Value="102"/>
+            <Setter Property="IsCompact" Value="True"/>
+        
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="uap:AppBarButton">
+                        <Grid  x:Name="RootGrid" Background="Transparent" MaxWidth="{TemplateBinding MaxWidth}" MinWidth="{TemplateBinding MinWidth}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="ApplicationViewStates">
+                                    <VisualState x:Name="FullSize"/>
+                                    <VisualState x:Name="Compact">
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0" To="0" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="TextLabel"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Overflow">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Orientation" Storyboard.TargetName="ContentStack">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Horizontal"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="Content">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="HorizontalAlignment" Storyboard.TargetName="RootGrid">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Stretch"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Width" Storyboard.TargetName="RootGrid">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="NaN"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="TextWrapping" Storyboard.TargetName="TextLabel">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="NoWrap"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="VerticalAlignment" Storyboard.TargetName="TextLabel">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Center"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="TextAlignment" Storyboard.TargetName="TextLabel">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Left"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" Storyboard.TargetName="TextLabel">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="18,16.5,0,19.5"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" Storyboard.TargetName="ContentStack">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="0"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="FontSize" Storyboard.TargetName="TextLabel">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="22.5"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="OverflowWithToggleButtons">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Orientation" Storyboard.TargetName="ContentStack">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Horizontal"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="Content">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="HorizontalAlignment" Storyboard.TargetName="RootGrid">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Stretch"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Width" Storyboard.TargetName="RootGrid">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="NaN"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="TextWrapping" Storyboard.TargetName="TextLabel">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="NoWrap"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="VerticalAlignment" Storyboard.TargetName="TextLabel">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Center"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="TextAlignment" Storyboard.TargetName="TextLabel">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Left"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" Storyboard.TargetName="TextLabel">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="57,16.5,0,19.5"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" Storyboard.TargetName="ContentStack">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="0"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="FontSize" Storyboard.TargetName="TextLabel">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="22.5"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="PointerOver">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="RootGrid">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource SystemControlForegroundListLowBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="RootGrid">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource SystemControlForegroundListMediumBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="Content">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource SystemControlDisabledBaseLowBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="TextLabel">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource SystemControlDisabledBaseLowBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="FocusStates">
+                                    <VisualState x:Name="Focused"/>
+                                    <VisualState x:Name="Unfocused"/>
+                                    <VisualState x:Name="PointerFocused"/>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <StackPanel x:Name="ContentStack" HorizontalAlignment="Stretch" Margin="1.5,21,1.5,9" VerticalAlignment="Top">
+                                <TextBlock x:Name="Content"  Foreground="White" FontSize="30" FontFamily="{TemplateBinding FontFamily}" HorizontalAlignment="Stretch" Height="30" Margin="0,0,0,6" TextAlignment="Center" Text="{TemplateBinding Character}"/>
+                                <TextBlock x:Name="TextLabel" Foreground="White" FontSize="18" FontFamily="{StaticResource ContentControlThemeFontFamily}" TextAlignment="Center" TextWrapping="Wrap" Text="{TemplateBinding Label}"/>
+                            </StackPanel>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </phone:PhoneApplicationPage.Resources>
+
+    <phone:PhoneApplicationPage.DataContext>
+        <viewModels:FolderViewModel/>
+    </phone:PhoneApplicationPage.DataContext>
+
+    <!--<phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar ForegroundColor="#FFFFFE" BackgroundColor="{StaticResource LiveChromeColor}">
+            <shell:ApplicationBarIconButton Click="Delete_Click" IconUri="/Assets/AppBar/delete.png" Text="delete"/>
+            <shell:ApplicationBarIconButton Click="Share_Click" IconUri="/Assets/AppBar/share.png" Text="share"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>-->
+
+    <Grid x:Name="LayoutRoot" Background="#ecf0f1">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Border Height="74" Margin="24,24,24,12" Background="White" BorderBrush="{StaticResource borderGray}" BorderThickness="0,0,0,2">
+            <toolkit:ContextMenuService.ContextMenu>
+                <toolkit:ContextMenu IsZoomEnabled="False" Gesture="Tap">
+                    <toolkit:MenuItem Click="Copy_Click" Header="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.copy}"/>
+                    <toolkit:MenuItem Click="Edit_Click" Header="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.edit}"/>
+                </toolkit:ContextMenu>
+            </toolkit:ContextMenuService.ContextMenu>
+            <Grid Margin="12,8,0,2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.title}" Foreground="{StaticResource primary}" FontFamily="{StaticResource LiveFontFamily}"/>
+                <TextBlock Grid.Row="1" Text="{Binding Title}" Foreground="Black" FontSize="{StaticResource PhoneFontSizeLarge}" FontFamily="{StaticResource LiveFontFamily}"/>
+
+                <Image Margin="6,0" Grid.RowSpan="2" Source="/Images/parent.png" Height="30" Grid.Column="1"/>
+            </Grid>
+        </Border>
+
+        <phone:LongListSelector Grid.Row="1" 
+                ItemsSource="{Binding Files}"
+                Name="items">
+            <phone:LongListSelector.ListHeader>
+                <!--<Border Name="brdAddFile" Tap="Border_Tap"   toolkit:TiltEffect.IsTiltEnabled="True"    Margin="24,6" BorderThickness="0,0,0,3" BorderBrush="#1c5981" CornerRadius="0" Background="{StaticResource primary}" Grid.Row="3">
+                        <TextBlock Margin="12,6" FontFamily="GothamNarrow-Light.ttf#Gotham" TextAlignment="Center" FontSize="25" Text="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.addfile}" ></TextBlock>
+                    </Border>-->
+                <Button Click="AddFile_Click" VerticalAlignment="Top" Content="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.addfile}" Style="{StaticResource LivePasswordButtonStyle}" Margin="12,0,12,12"/>
+            </phone:LongListSelector.ListHeader>
+            <!--EmptyContent="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.importpicture}"-->
+            <phone:LongListSelector.ItemTemplate>
+                <DataTemplate>
+                    <Border Height="74" Margin="24,0,24,12" Background="White" BorderBrush="{StaticResource borderGray}" BorderThickness="0,0,0,2">
+                        <toolkit:ContextMenuService.ContextMenu>
+                            <toolkit:ContextMenu IsZoomEnabled="False" Gesture="Tap">
+                                <toolkit:MenuItem Click="Open_Click" Header="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.cOpen}"/>
+                                <toolkit:MenuItem Click="Save_Click" Header="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.save}"/>
+                                <toolkit:MenuItem Click="Share_Click" Header="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.shares}"/>
+                                <toolkit:MenuItem Click="Delete_Click" Header="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.delete}"/>
+                            </toolkit:ContextMenu>
+                        </toolkit:ContextMenuService.ContextMenu>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Border VerticalAlignment="Stretch" Width="66" Background="{StaticResource PhoneChromeBrush}">
+                                <Image  Width="33" Height="33" Source="{Binding Extension, Converter={StaticResource TypeFile}}"/>
+                            </Border>
+
+                            <Grid Margin="12,8,6,2" Grid.Column="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <TextBlock FontSize="18" FontFamily="GothamNarrow-Light.ttf#Gotham"  Foreground="{StaticResource primary}" Grid.Row="1" Grid.Column="1" Text="{Binding ItemDate}"/>
+                                <TextBlock Foreground="{StaticResource primary}" FontFamily="{StaticResource LiveFontFamily}" Grid.Row="1">
+                                        <Run Text="{Binding Size, Converter={StaticResource bytes}}"/><Run Text=","/>
+                                        <Run Text="{Binding Extension}"/>
+                                </TextBlock>
+                                <TextBlock Grid.ColumnSpan="2" Grid.Row="0" Text="{Binding DisplayName}" Foreground="Black" FontSize="{StaticResource PhoneFontSizeLarge}" FontFamily="{StaticResource LiveFontFamily}" Margin="0,0,0,0"/>
+
+                                <Image Margin="6,0" Grid.RowSpan="2" Source="/Images/parent.png" Height="30" Grid.Column="1"/>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </phone:LongListSelector.ItemTemplate>
+        </phone:LongListSelector>
+
+        <uap:CommandBar HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" toolkit:TiltEffect.SuppressTilt="True" Background="{StaticResource LiveChromeBrush}" Foreground="White" Grid.Row="2">
+            <uap:AppBarButton  Click="DeleteAll_Click" Label="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.delete}" Icon="Delete" Style="{StaticResource AppBarButtonStyle1}"/>
+             </uap:CommandBar>
+    </Grid>
+
+</phone:PhoneApplicationPage>

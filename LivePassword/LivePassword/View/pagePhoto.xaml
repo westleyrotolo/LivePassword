@@ -1,0 +1,131 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="LivePassword.View.pagePhoto"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+           xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+           xmlns:telerikPrimitives="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Primitives"
+      xmlns:telerikCore="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Core"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="False">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <telerikPrimitives:RadTransitionControl.Transition>
+        <telerikPrimitives:RadScaleTransition PlayMode="Consecutively"/>
+    </telerikPrimitives:RadTransitionControl.Transition>
+    <Grid x:Name="LayoutRoot" Background="#ecf0f1">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Background="{StaticResource primary}" Height="30" Margin="0,0,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Image Source="Images/lock.png" Margin="0,0"></Image>
+            <TextBlock Text="Live Password" Grid.Column="1" VerticalAlignment="Center" FontFamily="GothamNarrow-Light.ttf#Gotham"></TextBlock>
+            <TextBlock Margin="5,0" Text="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.images}" Grid.Column="1" VerticalAlignment="Center" FontFamily="GothamNarrow-Light.ttf#Gotham" HorizontalAlignment="Right"></TextBlock>
+        </Grid>
+        <!--ContentPanel - place additional content here
+        -->
+        <Grid Background="#ecf0f1" x:Name="ContentPanel" Grid.Row="1" Margin="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Border Tap="Border_Tap"   toolkit:TiltEffect.IsTiltEnabled="True"    Margin="12,6" Background="White" BorderThickness="0,0,0,2" BorderBrush="{StaticResource borderGray}">
+                <telerikPrimitives:RadContextMenu.ContextMenu>
+                    <telerikPrimitives:RadContextMenu IsFadeEnabled="False" Name="ctxmenu"
+                                          IsZoomEnabled="False">
+                        <telerikPrimitives:RadContextMenuItem Content="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.copy}" 
+                                                  Tapped="RadContextMenuItem_Tapped"/>
+                        <telerikPrimitives:RadContextMenuItem Content="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.edit}"
+                                                  Tapped="RadContextMenuItem_Tapped_1"/>
+                    </telerikPrimitives:RadContextMenu>
+                </telerikPrimitives:RadContextMenu.ContextMenu>
+                <Grid Margin="0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.title}" FontSize="20"  Foreground="{StaticResource primary}" Margin="10,0" FontFamily="GothamNarrow-Light.ttf#Gotham"></TextBlock>
+                    <TextBlock Grid.Row="1" Text="{Binding title}" Foreground="Black" FontSize="30" Margin="10,0" FontFamily="GothamNarrow-Light.ttf#Gotham"></TextBlock>
+                    <Image Margin="5" Grid.RowSpan="2" Source="/Images/parent.png" Height="30" Grid.Column="1"></Image>
+                </Grid>
+            </Border>
+            <telerikPrimitives:RadDataBoundListBox
+                HorizontalContentAlignment="Center"
+                Grid.Row="3"
+                HorizontalAlignment="Center"
+                Margin="12,6"
+                ItemsSource="{Binding Img}"
+         telerikCore:InteractionEffectManager.IsInteractionEnabled="True"      EmptyContent="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.importpicture}"  
+             IsCheckModeEnabled="False"
+                Name="items"
+                >
+                <telerikPrimitives:RadDataBoundListBox.VirtualizationStrategyDefinition>
+                    <telerikPrimitives:WrapVirtualizationStrategyDefinition  Orientation="Horizontal"></telerikPrimitives:WrapVirtualizationStrategyDefinition>
+                </telerikPrimitives:RadDataBoundListBox.VirtualizationStrategyDefinition>
+                <telerikPrimitives:RadDataBoundListBox.ItemAddedAnimation>
+                    <telerikCore:RadScaleAndFadeAnimation Duration="0:0:1">
+                        <telerikCore:RadScaleAndFadeAnimation.Easing>
+                            <CubicEase EasingMode="EaseOut"/>
+                        </telerikCore:RadScaleAndFadeAnimation.Easing>
+                    </telerikCore:RadScaleAndFadeAnimation>
+                </telerikPrimitives:RadDataBoundListBox.ItemAddedAnimation>
+                <telerikPrimitives:RadDataBoundListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Image MaxHeight="200" Tap="Image_Tap" MaxWidth="200" Stretch="Uniform"  Source="{Binding _name, Converter={StaticResource conv}}" Margin="5" >
+                         
+                            </Image>
+                    </DataTemplate>
+                </telerikPrimitives:RadDataBoundListBox.ItemTemplate>
+            </telerikPrimitives:RadDataBoundListBox>
+
+
+        </Grid>
+        <Grid Grid.Row="1" Name="pPhoto" Visibility="Collapsed" Width="{Binding ElementName=ContentPanel, Path=ActualWidth}" Background="Black" Height="{Binding ElementName=ContentPanel, Path=ActualHeight}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Image Stretch="Uniform" Name="imagepopup" Grid.RowSpan="2"></Image>
+            <Grid Grid.Row="1">
+                <Grid.Background>
+                    <SolidColorBrush Color="Black" Opacity=".5">
+                    </SolidColorBrush>
+                </Grid.Background>
+                <Image Height="50" Tap="Image_Tap_1" Width="50" Source="/Images/overflowdots.png" HorizontalAlignment="Right">
+                </Image>
+                <telerikPrimitives:RadContextMenu.ContextMenu>
+                    <telerikPrimitives:RadContextMenu IsFadeEnabled="False" x:Name="ctxmenu1"
+                                          IsZoomEnabled="False">
+                        <telerikPrimitives:RadContextMenuItem Content="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.save}" 
+                                                  Tapped="RadContextMenuItem_Tapped_2"/>
+                        <telerikPrimitives:RadContextMenuItem Content="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.delete}"
+                                                  Tapped="RadContextMenuItem_Tapped_4"/>
+                    </telerikPrimitives:RadContextMenu>
+                </telerikPrimitives:RadContextMenu.ContextMenu>
+            </Grid>
+            </Grid>
+           
+    </Grid>
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" ForegroundColor="White"  IsMenuEnabled="False" BackgroundColor="{StaticResource BackgroundColor}">
+            <shell:ApplicationBarIconButton Click="ApplicationBarIconButton_Click"  IconUri="/Images/Delete.png" Text="Delete"></shell:ApplicationBarIconButton>
+            <shell:ApplicationBarIconButton Click="ApplicationBarIconButton_Click_1" IconUri="/Images/Add.png" Text="Add image "></shell:ApplicationBarIconButton>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+</phone:PhoneApplicationPage>
